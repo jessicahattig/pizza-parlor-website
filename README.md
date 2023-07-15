@@ -31,6 +31,7 @@ _This is an interactive pizza parlor website project featuring dynamic functiona
 ## Known Bugs
 
 *  _After submitting the order, it is displayed on the page but not actually submitted to a queue for processing._
+* _File (node_modules/bootstrap/dist/js/bootstrap.bundle.min.js.map) is broken.
 
 ## Tests
 
