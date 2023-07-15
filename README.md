@@ -14,7 +14,7 @@
 * _Github_
 * _Git_
 * _W3Schools_
-*_BootStrap_
+* _BootStrap_
 
 ## Description
 

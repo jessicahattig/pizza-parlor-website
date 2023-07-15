@@ -4,18 +4,18 @@ function Order() {
   this.currentId = 0;
 }
 
-Order.prototype.addPizza = function(pizza) {
+Order.prototype.addPizza = function (pizza) {
   pizza.id = this.assignId();
   pizza.price = this.calculatePrice(pizza);
   this.pizzas[pizza.id] = pizza;
 }
 
-Order.prototype.assignId = function() {
+Order.prototype.assignId = function () {
   this.currentId += 1;
   return this.currentId;
 }
 
-Order.prototype.calculatePrice = function(pizza) {
+Order.prototype.calculatePrice = function (pizza) {
   const sizeCosts = {
     small: 8,
     medium: 10,
@@ -30,7 +30,7 @@ Order.prototype.calculatePrice = function(pizza) {
   };
 
   let totalPrice = sizeCosts[pizza.size] || 0;
-  pizza.toppings.forEach(function(topping) {
+  pizza.toppings.forEach(function (topping) {
     totalPrice += toppingsCosts[topping] || 0;
   });
 
@@ -43,12 +43,12 @@ function Pizza(toppings, size) {
 }
 
 // UI Logic
-window.addEventListener("load", function() {
+window.addEventListener("load", function () {
   const form = document.querySelector("form");
   form.addEventListener("submit", displayOrder);
 
   const resetButton = document.querySelector('#reset-button');
-  resetButton.addEventListener('click', function(event) {
+  resetButton.addEventListener('click', function (event) {
     event.preventDefault();
     form.reset();
     const finalOrderElement = document.getElementById("final-order");
