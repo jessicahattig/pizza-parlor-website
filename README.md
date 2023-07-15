@@ -25,7 +25,7 @@ _This is an interactive pizza parlor website project featuring dynamic functiona
 ## Setup/Installation Requirements
 
 * _Clone this repository to your desktop._
-* _Navigate to the directory titled "Mr.-Robogers-Neighborhood"._
+* _Navigate to the directory titled "pizza-parlor-website"._
 * _Open the file "index.html" in your browser._
 
 ## Known Bugs
