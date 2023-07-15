@@ -18,7 +18,7 @@
 
 ## Description
 
-_Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi esse nostrum facilis quibusdam dolorem dolorum laborum mollitia temporibus quas magni! Nesciunt facilis voluptates obcaecati impedit odit totam dolorem mollitia id?._
+_This is an interactive pizza parlor website project featuring dynamic functionality for building and customizing virtual pizza orders. Explore intermediate JavaScript concepts using prototypes and constructors to select pizza size, toppings, and calculate the total cost of your order._
 
 [GitHub Pages ](https://jessicahattig.github.io/xxxxx)
 
@@ -30,7 +30,7 @@ _Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi esse nostrum 
 
 ## Known Bugs
 
-*  _Note to self, check for bugs by testing limitations._
+*  _After submitting the order, it is displayed on the page but not actually submitted to a queue for processing._
 
 ## Tests
 
