@@ -16,10 +16,14 @@ Order.prototype.assignId = function() {
 }
 
 Order.prototype.calculatePrice = function(pizza) {
-  let sizeCost = 10;
+  let sizeCost = {
+    small: 8,
+    medium: 10,
+    large: 12,
+  };
   let toppingsCost = 1.5;
 
-  let totalPrice = (pizza.size * sizeCost) + (pizza.toppings.length * toppingsCost);
+  let totalPrice = (sizeCost[pizza.size] || 0) + (pizza.toppings.length * toppingsCost);
 
   return totalPrice;
 }

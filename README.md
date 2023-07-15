@@ -67,6 +67,13 @@ Code:
   console.log(myOrder.pizzas[myPizza.id]);
 Expexted Output: price: 123
 
+Test: "It should calculate cost of pizza depending what size is selected."
+Code:
+  const myOrder = new Order();
+  const myPizza = new Pizza(["anchovies", "pineapple"], "medium");
+  myOrder.addPizza(myPizza);
+  console.log(myOrder.pizzas[myPizza.id]);
+Expected Output: price: 13
 
 ## License
 
