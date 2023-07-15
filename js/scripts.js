@@ -60,7 +60,7 @@ function displayOrder(event) {
   event.preventDefault();
 
   const sizeCheckboxes = document.querySelectorAll('input[name="size"]:checked');
-  const selectedSize = Array.from(sizeCheckboxes).map(checkbox => checkbox.id);
+  const selectedSize = Array.from(sizeRadioButtons).map(radio => radio.id)[0];
 
   const toppingsCheckboxes = document.querySelectorAll('input[name="toppings"]:checked');
   const selectedToppings = Array.from(toppingsCheckboxes).map(checkbox => checkbox.id);
