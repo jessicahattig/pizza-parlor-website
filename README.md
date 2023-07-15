@@ -62,9 +62,12 @@ Expected Output: Pizza {toppings: ["anchovies", "pineapple"], size: "medium", id
 Test: "It should calculate cost of pizza."
 Code: 
   const myOrder = new Order();
-  const myPizza = new Pizza(["anchovies", "pineapple"], "medium");
+  const myPizza = new Pizza(["anchovies", "pineapple"], 12);
   myOrder.addPizza(myPizza);
-  console.log(order.pizzas[myPizza.id]);
+  console.log(myOrder.pizzas[myPizza.id]);
+Expexted Output: price: 123
+
+
 ## License
 
 MIT

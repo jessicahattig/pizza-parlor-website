@@ -6,6 +6,7 @@ function Order() {
 
 Order.prototype.addPizza = function(pizza) {
   pizza.id = this.assignId();
+  pizza.price = this.calculatePrice(pizza);
   this.pizzas[pizza.id] = pizza;
 }
 
@@ -23,7 +24,7 @@ Order.prototype.calculatePrice = function(pizza) {
   return totalPrice;
 }
 
-function Pizza(topping, size) {
-  this.topping = topping;
+function Pizza(toppings, size) {
+  this.toppings = toppings;
   this.size = size;
 }
