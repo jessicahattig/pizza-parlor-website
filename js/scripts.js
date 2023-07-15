@@ -46,6 +46,14 @@ function Pizza(toppings, size) {
 window.addEventListener("load", function() {
   const form = document.querySelector("form");
   form.addEventListener("submit", displayOrder);
+
+  const resetButton = document.querySelector('#reset-button');
+  resetButton.addEventListener('click', function(event) {
+    event.preventDefault();
+    form.reset();
+    const finalOrderElement = document.getElementById("final-order");
+    finalOrderElement.innerHTML = ""; // Clear the content of finalOrderElement
+  });
 });
 
 function displayOrder(event) {
@@ -53,7 +61,6 @@ function displayOrder(event) {
 
   const sizeCheckboxes = document.querySelectorAll('input[name="size"]:checked');
   const selectedSize = Array.from(sizeCheckboxes).map(checkbox => checkbox.id);
-
 
   const toppingsCheckboxes = document.querySelectorAll('input[name="toppings"]:checked');
   const selectedToppings = Array.from(toppingsCheckboxes).map(checkbox => checkbox.id);
