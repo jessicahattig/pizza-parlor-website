@@ -6,7 +6,6 @@ function Order() {
 
 Order.prototype.addPizza = function(pizza) {
   pizza.id = this.assignId();
-  pizza.price = this.calculatePrice(pizza);
   this.pizzas[pizza.id] = pizza;
 }
 
@@ -23,24 +22,56 @@ function Pizza(toppings, size) {
 //UI Logic
 window.addEventListener("load", function() {
   const form = document.querySelector("form");
-  form.addEventListener("submit", displayOrder)
+  form.addEventListener("submit", displayOrder);
 });
 
-function displayOrder(event){
+function displayOrder(event) {
   event.preventDefault();
-  const selectedItems = [];
 
   const pizzaSize = document.getElementsByName("size");
-  const selectedSize = Array.from(pizzaSize).find(size => size.checked);
-  const sizeValue = selextedSize ? selectedSize.value : "";
+  let sizeName = "";
+  pizzaSize.forEach(size => {
+    if (size.checked) {
+      sizeName = size.nextElementSibling.textContent.split(" $")[0];
+    }
+  });
 
-const toppings = document.getElementsByName("toppings");
-const selectedToppings = Array.from(toppings).filter(topping => topping.checked).map(topping => topping.value);
+  const toppings = document.getElementsByName("toppings");
+  const selectedToppings = [];
+  toppings.forEach(topping => {
+    if (topping.checked) {
+      selectedToppings.push(topping.nextElementSibling.textContent.split(" $")[0]);
+    }
+  });
 
-const myOrder = new Order();
-const myPizza = new Pizza(selectedToppings, sizeValue);
-myOrder.addPizza(myPizza);
+  const myOrder = new Order();
+  const myPizza = new Pizza(selectedToppings, sizeName);
+  myOrder.addPizza(myPizza);
 
-const finalOrderElement = document.getElementById("final-order");
-finalOrderElement.innerText = `Your order total is: $${myOrder.pizzas[myPizza.id].price}\nItems: ${selectedToppings.join(", ")} ${sizeValue} pizza`;
+  const totalPrice = calculateTotalPrice(sizeName, selectedToppings);
+
+  const finalOrderElement = document.getElementById("final-order");
+  finalOrderElement.innerHTML = `<strong>Your order:</strong><br>Pizza Size: ${sizeName}<br>Toppings: ${selectedToppings.join(", ")}<br>Total Cost: $${totalPrice.toFixed(2)}`;
+}
+
+function calculateTotalPrice(sizeName, selectedToppings) {
+  const sizeCosts = {
+    small: 8,
+    medium: 10,
+    large: 12
+  };
+
+  const toppingsCosts = {
+    anchovies: 1,
+    pepperoni: 1,
+    pineapple: 1.5,
+    spinach: 0.5
+  };
+
+  let totalPrice = sizeCosts[sizeName] || 0;
+  selectedToppings.forEach(function(topping) {
+    totalPrice += toppingsCosts[topping] || 0;
+  });
+
+  return totalPrice;
 }
