@@ -21,11 +21,19 @@ Order.prototype.calculatePrice = function(pizza) {
     medium: 10,
     large: 12,
   };
-  let toppingsCost = 1.5;
+  let toppingsCost = {
+    anchovies: 1,
+    pepperoni: 1,
+    pineapple: 1.5,
+    spinach: 0.5
+  };
 
-  let totalPrice = (sizeCost[pizza.size] || 0) + (pizza.toppings.length * toppingsCost);
+  let totalPrice = (sizeCost[pizza.size] || 0);
+  pizza.toppings.forEach(function(topping) { 
+    totalPrice += (toppingsCost[topping] || 0);
+  });
 
-  return totalPrice;
+  return totalPrice.toFixed(2);
 }
 
 function Pizza(toppings, size) {
