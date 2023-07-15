@@ -37,8 +37,28 @@ _Lorem ipsum dolor sit, amet consectetur adipisicing elit. Commodi esse nostrum 
 Describe: Pizza()
 
 Test: "It should return a Pizza object with two properties for toppings and size"
-Code: const myPizza = new Pizza(["anchovies", "pineapple"], "medium");
+Code: 
+  const myPizza = new Pizza(["anchovies", "pineapple"], "medium");
 Expected Output: Pizza { toppings: ["anchovies", "pineapple"], size: "medium" }
+
+Describe: Order();
+
+Test: "It should add pizza to order."
+Code:
+  const myOrder = new Order();
+  const myPizza = new Pizza(["anchovies", "pineapple"], "medium");
+  myOrder.addPizza(myPizza);
+  console.log(myOrder.pizzas);
+Expected Output: Pizza {toppings: ["anchovies", "pineapple"], size: "medium" }
+
+Test: "Pizza should have unique ID when added to Order."
+Code:
+  const myOrder = new Order();
+  const myPizza = new Pizza(["anchovies", "pineapple"], "medium");
+  myOrder.addPizza(myPizza);
+  console.log(myOrder.pizzas);
+Expected Output: Pizza {toppings: ["anchovies", "pineapple"], size: "medium", id: 1 }
+
 
 ## License
 
