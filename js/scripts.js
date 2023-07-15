@@ -1,4 +1,4 @@
-//Buisness Logic
+//Business Logic
 function Order() {
   this.pizzas = {};
   this.currentId = 0;
@@ -6,6 +6,7 @@ function Order() {
 
 Order.prototype.addPizza = function(pizza) {
   pizza.id = this.assignId();
+  pizza.price = this.calculatePrice(pizza);
   this.pizzas[pizza.id] = pizza;
 }
 
@@ -14,47 +15,7 @@ Order.prototype.assignId = function() {
   return this.currentId;
 }
 
-function Pizza(toppings, size) {
-  this.toppings = toppings;
-  this.size = size;
-}
-
-//UI Logic
-window.addEventListener("load", function() {
-  const form = document.querySelector("form");
-  form.addEventListener("submit", displayOrder);
-});
-
-function displayOrder(event) {
-  event.preventDefault();
-
-  const pizzaSize = document.getElementsByName("size");
-  let sizeName = "";
-  pizzaSize.forEach(size => {
-    if (size.checked) {
-      sizeName = size.nextElementSibling.textContent.split(" $")[0];
-    }
-  });
-
-  const toppings = document.getElementsByName("toppings");
-  const selectedToppings = [];
-  toppings.forEach(topping => {
-    if (topping.checked) {
-      selectedToppings.push(topping.nextElementSibling.textContent.split(" $")[0]);
-    }
-  });
-
-  const myOrder = new Order();
-  const myPizza = new Pizza(selectedToppings, sizeName);
-  myOrder.addPizza(myPizza);
-
-  const totalPrice = calculateTotalPrice(sizeName, selectedToppings);
-
-  const finalOrderElement = document.getElementById("final-order");
-  finalOrderElement.innerHTML = `<strong>Your order:</strong><br>Pizza Size: ${sizeName}<br>Toppings: ${selectedToppings.join(", ")}<br>Total Cost: $${totalPrice.toFixed(2)}`;
-}
-
-function calculateTotalPrice(sizeName, selectedToppings) {
+Order.prototype.calculatePrice = function(pizza) {
   const sizeCosts = {
     small: 8,
     medium: 10,
@@ -68,10 +29,39 @@ function calculateTotalPrice(sizeName, selectedToppings) {
     spinach: 0.5
   };
 
-  let totalPrice = sizeCosts[sizeName] || 0;
-  selectedToppings.forEach(function(topping) {
+  let totalPrice = sizeCosts[pizza.size] || 0;
+  pizza.toppings.forEach(function(topping) {
     totalPrice += toppingsCosts[topping] || 0;
   });
 
-  return totalPrice;
+  return totalPrice.toFixed(2);
+}
+
+function Pizza(toppings, size) {
+  this.toppings = toppings;
+  this.size = size;
+}
+
+// UI Logic
+window.addEventListener("load", function() {
+  const form = document.querySelector("form");
+  form.addEventListener("submit", displayOrder);
+});
+
+function displayOrder(event) {
+  event.preventDefault();
+
+  const sizeCheckboxes = document.querySelectorAll('input[name="size"]:checked');
+  const selectedSize = Array.from(sizeCheckboxes).map(checkbox => checkbox.id);
+
+
+  const toppingsCheckboxes = document.querySelectorAll('input[name="toppings"]:checked');
+  const selectedToppings = Array.from(toppingsCheckboxes).map(checkbox => checkbox.id);
+
+  const myOrder = new Order();
+  const myPizza = new Pizza(selectedToppings, selectedSize);
+  myOrder.addPizza(myPizza);
+
+  const finalOrderElement = document.getElementById("final-order");
+  finalOrderElement.innerHTML = `<strong>Your order:</strong><br>Pizza Size: ${selectedSize}<br>Toppings: ${selectedToppings.join(", ")}<br>Total Cost: $${myOrder.pizzas[myPizza.id].price}`;
 }
