@@ -20,8 +20,6 @@
 
 _This is an interactive pizza parlor website project featuring dynamic functionality for building and customizing virtual pizza orders. Explore intermediate JavaScript concepts using prototypes and constructors to select pizza size, toppings, and calculate the total cost of your order._
 
-[GitHub Pages ](https://jessicahattig.github.io/xxxxx)
-
 ## Setup/Installation Requirements
 
 * _Clone this repository to your desktop._
